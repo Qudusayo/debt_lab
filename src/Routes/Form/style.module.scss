@@ -1,0 +1,52 @@
+.form {
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        width: 85%;
+        margin: auto;
+
+        div {
+            input {
+                display: block;
+                width: 96%;
+                margin: 0.3em 0 1.7em 0;
+                padding: 0.5em 2%;
+                height: 2em;
+                outline: none;
+                border: 1px solid #999999;
+                border-radius: 7px;
+                background-color: transparent;
+                font-weight: 600;
+                letter-spacing: .2em;
+
+                &[type="checkbox"] {
+                    display: inline-block;
+                    margin-right: 1em;
+                    width: auto;
+                    height: auto;
+                    padding: 0;
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin: 0.3em 0 1.7em 0;
+            padding: 1em;
+            outline: none;
+            border: 1px solid #999999;
+            border-radius: 7px;
+            color: #FFFFFF;
+            font-weight: 600;
+            letter-spacing: .5em;
+            cursor: pointer;
+
+            transition: background .3s linear;
+        }
+    }
+}
