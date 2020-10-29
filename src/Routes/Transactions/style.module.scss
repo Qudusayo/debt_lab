@@ -1,0 +1,44 @@
+.Transaction {
+    ul {
+        padding-inline-start: 0;
+        list-style-type: none;
+        width: 94%;
+        margin: 0 auto;
+
+        li {
+            border-bottom: 1px solid #999999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            div {
+                padding-bottom: 0.5em;
+
+                h3 {
+                    margin-bottom: 0;
+                    font-weight: 400;
+
+                    &.debt {
+                        color: rgb(31, 30, 30);
+                        text-align: right;
+                        font-weight: 600;
+                    }
+
+                    &.debit {
+                        color: rgb(252, 42, 42);
+                        font-weight: 600;
+                        text-align: right;
+                    }
+                }
+
+                span{
+                    font-weight: 600;
+
+                    &:nth-of-type(2){
+                        font-weight: 400 !important;
+                    }
+                }
+            }
+        }
+    }
+}
