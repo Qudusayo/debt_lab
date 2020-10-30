@@ -1,15 +1,20 @@
-import React from 'react'
-import Card from './Card'
+import React from "react";
+import Card from "./Card";
+
+import styles from "./style.module.scss";
 
 function Home() {
     return (
-        <div>
-            <Card cardType="balance" unit="25,000" date="20/10/2020" />
-            <Card cardType="credit" unit="40,000" date="20/10/2020" />
-            <Card cardType="debit" unit="10,050" date="20/10/2020" />
-            <Card cardType="debt" unit="16,000" date="20/10/2020" />
+        <div className={styles.Home}>
+            <Card cardType="balance" unit="00.00" />
+            <Card cardType="credit" unit="00.00" />
+            <Card cardType="debit" unit="00.00" />
+            <Card cardType="debt" unit="00.00" />
+            <button className={styles.addButton} id="add">
+                +
+            </button>
         </div>
-    )
+    );
 }
 
-export default Home
+export default Home;

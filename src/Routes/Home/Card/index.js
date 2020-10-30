@@ -2,6 +2,11 @@ import React from "react";
 import styles from './style.module.scss'
 
 export default function index(props) {
+    const date = new Date;
+    const dateNow = date.toLocaleString();
+    const todaysDate = dateNow.split(',')[0]
+
+
     return (
         <div className={[styles.creditCard, styles[props.cardType]].join(" ")}>
             <span>
@@ -9,7 +14,7 @@ export default function index(props) {
             </span>
             <h1>NGN {props.unit}</h1>
             <span>
-                <small>as at {props.date}</small>
+                <small>as at <b>{todaysDate}</b></small>
             </span>
         </div>
     );
