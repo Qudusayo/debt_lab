@@ -4,6 +4,10 @@
         list-style-type: none;
         width: 94%;
         margin: 0 auto;
+        
+        a {
+            text-decoration: none;
+        }
 
         li {
             border-bottom: 1px solid #999999;
@@ -17,24 +21,26 @@
                 h3 {
                     margin-bottom: 0;
                     font-weight: 800;
+                    color: #80a4ed;
 
                     &.debt {
-                        color: #081C15;
+                        color: #081c15;
                         text-align: right;
                         font-weight: 600;
                     }
 
                     &.debit {
-                        color: #FE4A49;
+                        color: #fe4a49;
                         font-weight: 600;
                         text-align: right;
                     }
                 }
 
-                span{
+                span {
                     font-weight: 600;
+                    color: #081c15;
 
-                    &:nth-of-type(2){
+                    &:nth-of-type(2) {
                         font-weight: 400 !important;
                     }
                 }

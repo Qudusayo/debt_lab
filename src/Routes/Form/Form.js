@@ -15,12 +15,17 @@ class Form extends Component {
             checked: false,
         };
 
+        this.onCheck = this.onCheck.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange(e) {
         this.setState({ [e.target.id]: e.target.value });
+    }
+
+    onCheck(e) {
+        this.setState({ [e.target.id]: e.target.checked });
     }
 
     onSubmit(e) {
@@ -35,14 +40,12 @@ class Form extends Component {
             amount: this.state.amount,
             desc: this.state.desc,
             date: todaysDate,
-            debted: this.state.checked,
+            debted: !this.state.checked,
         };
 
-        console.log(this.state.checked);
         localforage
             .getItem("store")
             .then((res) => {
-                console.log(res);
                 if (res === null) {
                     localforage
                         .setItem("store", [body])
@@ -136,8 +139,8 @@ class Form extends Component {
                         <label htmlFor="paid">Paid :</label>
                         <div className={styles.switcher}>
                             <input
-                                onChange={this.onChange}
-                                defaultChecked={this.state.checked}
+                                onChange={this.onCheck}
+                                checked={this.state.checked}
                                 type="checkbox"
                                 id="checked"
                                 className={styles.checkbox}
@@ -150,7 +153,7 @@ class Form extends Component {
                     <button
                         type="submit"
                         style={
-                            this.state.checked === "on"
+                            this.state.checked
                                 ? { backgroundColor: "#FE4A49" }
                                 : { backgroundColor: "#081C15" }
                         }

@@ -1,0 +1,30 @@
+.Trancs {
+    h2 {
+        text-align: center;
+    }
+
+    .board {
+        width: 75%;
+        margin: auto;
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h3 {
+                &:nth-of-type(2) {
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+        color: #081C15;
+        text-align: center;
+        font-weight: bolder;
+    }
+}
