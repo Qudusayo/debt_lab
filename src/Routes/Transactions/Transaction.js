@@ -25,9 +25,9 @@ class Transaction extends Component {
         return (
             <div className={styles.Transaction}>
                 <ul>
-                    {this.state.transactions.map((transc) => {
+                    {this.state.transactions.map((transc, index) => {
                         return (
-                            <li>
+                            <li key={index}>
                                 <div>
                                     <h3>{transc.number}</h3>
                                     <span>
