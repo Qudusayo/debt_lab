@@ -100,8 +100,8 @@ class Form extends Component {
                         type="submit"
                         style={
                             this.state.checked === "on"
-                                ? { backgroundColor: "rgb(252, 42, 42)" }
-                                : { backgroundColor: "rgb(31, 30, 30)" }
+                                ? { backgroundColor: "#FE4A49" }
+                                : { backgroundColor: "#081C15" }
                         }
                     >
                         SUBMIT TRANSACTION
