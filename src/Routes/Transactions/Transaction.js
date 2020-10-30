@@ -1,40 +1,50 @@
 import React, { Component } from "react";
+import localforage from "localforage";
 
 import styles from "./style.module.scss";
 
 class Transaction extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            transactions: [],
+        };
+    }
+
+    componentDidMount() {
+        localforage
+            .getItem("store")
+            .then((res) => {
+                this.setState({ transactions: res });
+            })
+            .catch((err) => console.log(err));
+    }
+
     render() {
         return (
             <div className={styles.Transaction}>
                 <ul>
-                    <li>
-                        <div>
-                            <h3>07016412041</h3>
-                            <span>
-                                <small>STARTIMES 1M SUBSCRIPTION</small>
-                            </span>
-                        </div>
-                        <div>
-                            <h3 className={styles.debt}>2400.00</h3>
-                            <span>
-                                <small>22/10/2020</small>
-                            </span>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <h3>07016412041</h3>
-                            <span>
-                                <small>STARTIMES 1M SUBSCRIPTION</small>
-                            </span>
-                        </div>
-                        <div>
-                            <h3 className={styles.debit}>200.00</h3>
-                            <span>
-                                <small>22/10/2020</small>
-                            </span>
-                        </div>
-                    </li>
+                    {this.state.transactions.map((transc) => {
+                        return (
+                            <li>
+                                <div>
+                                    <h3>{transc.number}</h3>
+                                    <span>
+                                        <small>{transc.desc}</small>
+                                    </span>
+                                </div>
+                                <div>
+                                    <h3 className={styles.debit}>
+                                        {transc.amount}
+                                    </h3>
+                                    <span>
+                                        <small>{transc.date}</small>
+                                    </span>
+                                </div>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         );
