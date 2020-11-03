@@ -1,6 +1,6 @@
 .creditCard {
     width: 85%;
-    padding: 1em 4%;
+    padding: 3.5em 4%;
     margin: .5em auto .5em auto;
     border-radius: 12px;
     box-shadow: 0 4px 8px 0 rgba(53, 105, 128, 0.3),
@@ -11,26 +11,12 @@
     font-family: "Dosis";
     user-select: none;
     text-transform: uppercase;
+    background-color: #FE4A49;
 
     h1 {
         margin-top: 0;
         font-weight: 700;
         font-family: "Dosis";
+        font-size: 2.8em;
     }
-}
-
-.balance {
-    background-color: #80A4ED;
-}
-
-.credit {
-    background-color: #1B998B;
-}
-
-.debt {
-    background-color: #081C15;
-}
-
-.debit {
-    background-color: #FE4A49;
 }

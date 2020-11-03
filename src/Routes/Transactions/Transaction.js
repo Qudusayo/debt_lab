@@ -26,13 +26,13 @@ class Transaction extends Component {
         return (
             <div className={styles.Transaction}>
                 <ul>
-                    {this.state.transactions ? (
-                        this.state.transactions.map((transc, index) => {
+                    {this.state.transactions && this.state.transactions.length > 0 ? (
+                        this.state.transactions.reverse().map((transc, index) => {
                             return (
                                 <Link key={index} to={`/transactions/${index}`}>
                                     <li>
                                         <div>
-                                            <h3>{transc.number}</h3>
+                                            <h3>{transc.name}</h3>
                                             <span>
                                                 <small>{transc.desc}</small>
                                             </span>

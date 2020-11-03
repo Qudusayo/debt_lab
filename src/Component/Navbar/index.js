@@ -15,9 +15,6 @@ function Navbar() {
                 <li>
                     <NavLink to="/transactions" activeClassName={styles.activeLink}>Trans</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/settings" activeClassName={styles.activeLink}>Settings</NavLink>
-                </li>
             </ul>
         </nav>
     );

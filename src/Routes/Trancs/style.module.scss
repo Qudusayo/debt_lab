@@ -23,8 +23,24 @@
     a {
         display: block;
         text-decoration: none;
-        color: #081C15;
+        color: #081c15;
         text-align: center;
         font-weight: bolder;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        margin: 1.5em 0 1.7em 0;
+        padding: 1em;
+        outline: none;
+        border: none;
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 7px;
+        color: #ffffff;
+        font-weight: 600;
+        letter-spacing: 0.5em;
+        cursor: pointer;
+        transition: background 0.3s linear;
     }
 }

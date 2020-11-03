@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import localforage from "localforage"
+import localforage from "localforage";
 import Card from "./Card";
-
-import styles from "./style.module.scss";
-
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -18,40 +15,28 @@ class Home extends Component {
 
     componentDidMount() {
         let debt = 0;
-        let debit = 0;
         localforage
             .getItem("store")
             .then((res) => {
-                res.forEach(el => {
-                    if(el.debted){
-                        debt  += parseFloat(el.amount)
-                    }else{
-                        debit  += parseFloat(el.amount)
+                res.forEach((el) => {
+                    if (el.amount) {
+                        debt += parseFloat(el.amount);
                     }
-                })
-                
-            }).then(() => {
-                if(!debt.toString().includes(".")){
-                    debt = debt.toString() + ".00"
+                });
+            })
+            .then(() => {
+                if (!debt.toString().includes(".")) {
+                    debt = debt.toString() + ".00";
                 }
-                if(!debit.toString().includes(".")){
-                    debit = debit.toString() + ".00"
-                }
-                this.setState({ debt, debit })
+                this.setState({ debt });
             })
             .catch((err) => console.log(err));
     }
 
     render() {
         return (
-            <div className={styles.Home}>
-                <Card cardType="balance" unit={this.state.balance} />
-                <Card cardType="credit" unit={this.state.credit} />
-                <Card cardType="debit" unit={this.state.debit} />
+            <div>
                 <Card cardType="debt" unit={this.state.debt} />
-                <button className={styles.addButton} id="add">
-                    +
-                </button>
             </div>
         );
     }

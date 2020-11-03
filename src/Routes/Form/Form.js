@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import localforage from "localforage";
+import swal from "@sweetalert/with-react";
 
 import styles from "./style.module.scss";
 
@@ -12,20 +13,14 @@ class Form extends Component {
             amount: "",
             network: "",
             desc: "",
-            checked: false,
         };
 
-        this.onCheck = this.onCheck.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange(e) {
         this.setState({ [e.target.id]: e.target.value });
-    }
-
-    onCheck(e) {
-        this.setState({ [e.target.id]: e.target.checked });
     }
 
     onSubmit(e) {
@@ -36,11 +31,11 @@ class Form extends Component {
         const todaysDate = dateNow.split(",")[0];
 
         let body = {
+            name: this.state.name,
             number: this.state.number,
             amount: this.state.amount,
             desc: this.state.desc,
             date: todaysDate,
-            debted: !this.state.checked,
         };
 
         localforage
@@ -49,23 +44,30 @@ class Form extends Component {
                 if (res === null) {
                     localforage
                         .setItem("store", [body])
-                        .then(() => console.log(true))
+                        .then(() => console.log(""))
                         .catch((err) => console.log(err));
                 } else if (res) {
                     localforage
                         .setItem("store", [...res, body])
-                        .then(() => console.log(true))
+                        .then(() => console.log(""))
                         .catch((err) => console.log(err));
                 }
             })
             .then(() => {
-                this.setState({
-                    name: "",
-                    number: "",
-                    amount: "",
-                    network: "",
-                    desc: "",
-                    checked: false,
+                swal({
+                    title: "Good job!",
+                    text: `${this.state.name} is added as a debtor`,
+                    icon: "warning",
+                    button: "Okay !",
+                }).then(() => {
+                    this.setState({
+                        name: "",
+                        number: "",
+                        amount: "",
+                        network: "",
+                        desc: "",
+                    });
+                    this.props.history.push("/");
                 });
             })
             .catch((err) => console.log(err));
@@ -135,28 +137,9 @@ class Form extends Component {
                             maxLength="35"
                         />
                     </div>
-                    <div className={[styles.input, styles.switch].join(" ")}>
-                        <label htmlFor="paid">Paid :</label>
-                        <div className={styles.switcher}>
-                            <input
-                                onChange={this.onCheck}
-                                checked={this.state.checked}
-                                type="checkbox"
-                                id="checked"
-                                className={styles.checkbox}
-                            />
-                            <label htmlFor="checked" className={styles.label}>
-                                <div className={styles.ball}></div>
-                            </label>
-                        </div>
-                    </div>
                     <button
                         type="submit"
-                        style={
-                            this.state.checked
-                                ? { backgroundColor: "#FE4A49" }
-                                : { backgroundColor: "#081C15" }
-                        }
+                        style={{ backgroundColor: "#FE4A49" }}
                     >
                         SUBMIT TRANSACTION
                     </button>

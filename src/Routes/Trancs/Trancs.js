@@ -1,25 +1,69 @@
 import React, { Component } from "react";
 import localforage from "localforage";
+import swal from "@sweetalert/with-react";
 
-import styles from './style.module.scss';
-import { Link } from "react-router-dom"
+import styles from "./style.module.scss";
+import { Link } from "react-router-dom";
 
 class Trancs extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            transactions: [],
             transaction: {},
         };
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick() {
+        swal({
+            title: "Are you sure",
+            text: `${this.state.transaction.name} has paid your debt ?`,
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                let debtors = this.state.transactions;
+                debtors.splice(
+                    this.state.transactions.length -
+                        this.props.match.params.id -
+                        1,
+                    1
+                );
+                localforage
+                    .setItem("store", debtors)
+                    .then(() =>
+                        swal(
+                            `${this.state.transaction.name} has paid your money`,
+                            {
+                                icon: "success",
+                                title: "Wow !",
+                            }
+                        ).then(() => {
+                            this.props.history.push("/");
+                        })
+                    )
+                    .catch((err) => console.log(err));
+            } else {
+                swal(`${this.state.transaction.name} still owes you`, {
+                    icon: "warning",
+                    title: "Note",
+                });
+            }
+        });
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id);
         localforage
             .getItem("store")
             .then((res) => {
-                this.setState({ transaction: res[this.props.match.params.id] });
-                console.log(res[this.props.match.params.id]);
+                this.setState({
+                    transaction:
+                        res[res.length - this.props.match.params.id - 1],
+                    transactions: res,
+                });
             })
             .catch((err) => console.log(err));
     }
@@ -30,6 +74,10 @@ class Trancs extends Component {
                 <h2>Transaction</h2>
                 <div className={styles.board}>
                     <div>
+                        <h3>Name: </h3>
+                        <h3>{this.state.transaction.name}</h3>
+                    </div>
+                    <div>
                         <h3>Number: </h3>
                         <h3>{this.state.transaction.number}</h3>
                     </div>
@@ -39,7 +87,7 @@ class Trancs extends Component {
                     </div>
                     <div>
                         <h3>Amount: </h3>
-                        <h3>{this.state.transaction.amount}</h3>
+                        <h3>₦ {this.state.transaction.amount}</h3>
                     </div>
                     <div>
                         <h3>Date: </h3>
@@ -50,15 +98,19 @@ class Trancs extends Component {
                         <h3>{this.state.transaction.debted ? "Yes" : "No"}</h3>
                     </div>
                     <div>
-                        <h3>Pool: </h3>
-                        <h3>{this.state.transaction.number}</h3>
+                        <button
+                            onClick={this.onClick}
+                            style={{ backgroundColor: "#081C15" }}
+                        >
+                            PAID
+                        </button>
                     </div>
                 </div>
-                
-                <br/>
-                <br/>
-                <br/>
+
+                <br />
+                <br />
                 <Link to="/transactions">GO BACK</Link>
+                <br />
             </div>
         );
     }

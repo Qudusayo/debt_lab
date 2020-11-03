@@ -1,6 +1,6 @@
 {
-  "short_name": "Debt Lab",
-  "name": "Managing your VTU businees without ink and paper",
+  "short_name": "Debt Manager",
+  "name": "Managing your VTU Debts",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF"
 }
